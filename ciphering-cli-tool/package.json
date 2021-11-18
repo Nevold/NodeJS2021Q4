@@ -4,15 +4,13 @@
   "description": "Для запуска приложения можно передать следующие параметры:",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "coverage": "jest --coverage"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Nevold"
-  },
-  "author": "Nevold",
+  "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/jest": "^27.0.2",
     "jest": "^27.3.1"
   }
 }
