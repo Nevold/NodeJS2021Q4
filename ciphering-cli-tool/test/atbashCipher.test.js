@@ -1,10 +1,6 @@
-const { encryptAtbash, isLowerCase, isUpperCase } = require('../shared/AtbashCipher');
+const { encryptAtbash, isLowerCase, isUpperCase, reversedNumber } = require('../shared/AtbashCipher');
 
 describe('Letter', () => {
-  //   beforeEach(() => {});
-  //   afterEach(() => {});
-  //   beforeAll(() => {});
-  //   afterAll(() => {});
   test('should be uppercase ', () => {
     expect(isUpperCase('A')).toBeTruthy();
     expect(isUpperCase('a')).toBeFalsy();
@@ -18,11 +14,21 @@ describe('Letter', () => {
     expect(isLowerCase('и')).toBeFalsy();
   });
 });
+describe('Number', () => {
+  test('should be expect with positive ', () => {
+    expect(reversedNumber(12)).toBe(13);
+    expect(reversedNumber(2)).toBe(23);
+  });
+  test('should be expect with negative ', () => {
+    expect(reversedNumber(-2)).toBe(23);
+    expect(reversedNumber(-12)).toBe(13);
+  });
+});
 
-describe('In cipher', () => {
+describe('In cipher Atbash', () => {
   test('should be encrypt the letter', () => {
     expect(encryptAtbash('a')).toMatch(/z/);
-    expect(encryptAtbash('z')).toMatch(/a/);
+    expect(encryptAtbash('Z')).toMatch(/A/);
   });
   test('should be not encrypt the letter', () => {
     expect(encryptAtbash('!')).toMatch(/!/);

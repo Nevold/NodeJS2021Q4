@@ -41,4 +41,4 @@ function encryptAtbash(text) {
   return encrypted;
 }
 
-module.exports = { encryptAtbash, isLowerCase, isUpperCase };
+module.exports = { encryptAtbash, isLowerCase, isUpperCase, reversedNumber };

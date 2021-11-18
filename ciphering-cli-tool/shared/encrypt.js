@@ -1,6 +1,6 @@
 const { argv, stderr } = process;
-const encryptAtbash = require('./AtbashCipher');
-const encryptCaesarRot = require('./CaesarRotCipher');
+const { encryptAtbash } = require('./AtbashCipher');
+const { encryptCaesarRot } = require('./CaesarRotCipher');
 
 function encrypt(text) {
   let encryptText = text;

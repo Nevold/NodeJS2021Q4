@@ -20,4 +20,4 @@ function encryptCaesarRot(massage, key) {
   return encMassage;
 }
 
-module.exports = encryptCaesarRot;
+module.exports = { encryptCaesarRot, mod };
