@@ -15,7 +15,6 @@ function encrypt(text) {
         configLog[i][0] !== configLog[i][0].toUpperCase() ||
         !/[CRA]/.test(configLog[i][0]):
         stderr.write('Сonfiguration is not valid!');
-
         break;
       case configLog[i][0] === 'C' && configLog[i][1] === '1':
         encryptText = encryptCaesarRot(encryptText, 1);
@@ -31,8 +30,6 @@ function encrypt(text) {
         break;
       case configLog[i][0] === 'A' && configLog[i][1] === undefined:
         encryptText = encryptAtbash(encryptText);
-        break;
-      default:
         break;
     }
   }
