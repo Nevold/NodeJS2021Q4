@@ -18,4 +18,12 @@ isDuplicate = () => {
   );
 };
 
-module.exports = { inputFile, outputFile, isDuplicate };
+duplicateError = () => {
+  if (isDuplicate()) {
+    process.stderr.write('Сonfiguration is duplicate!');
+    process.exit(1);
+  }
+  return null;
+};
+
+module.exports = { inputFile, outputFile, isDuplicate, duplicateError };

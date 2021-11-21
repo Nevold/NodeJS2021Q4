@@ -2,12 +2,12 @@ const { argv } = process;
 const fs = require('fs');
 const { stdin, stdout, stderr } = process;
 const { Transform, pipeline } = require('stream');
-const { inputFile, outputFile, isDuplicate } = require('./shared/utils');
+const { inputFile, outputFile, isDuplicate, duplicateError } = require('./shared/utils');
 const encrypt = require('./shared/encrypt');
 
-if (isDuplicate()) {
-  stderr.write('Сonfiguration is duplicate!');
-} else if (argv.indexOf('-i') === -1) {
+duplicateError();
+
+if (argv.indexOf('-i') === -1) {
   stdout.write('Enter text:\n');
   const transform = new Transform({
     transform(chunk, enc, cb) {
