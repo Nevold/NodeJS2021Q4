@@ -1,5 +1,5 @@
 const encrypt = require('../shared/encrypt');
-const { argv, stderr } = process;
+const { argv } = process;
 
 describe('Command C1 ', () => {
   beforeEach(() => {
@@ -62,16 +62,16 @@ describe('Command A ', () => {
   });
 });
 
-describe('Misconfiguration ', () => {
+describe('Command A ', () => {
   beforeEach(() => {
-    argv.push(...['-c', 'A1-D1-C2']);
+    argv.push(...['-c', 'A']);
   });
   afterEach(() => {
     argv.splice(2);
   });
-
-  test('should be write', () => {
-    expect(encrypt('abcde1A2B_C')).toMatch(/abcde1A2B_C/);
+  test('should be match', () => {
+    const mock = jest.fn(() => encrypt('abcde1A2B_C'));
+    expect(mock()).toBe('zyxwv1Z2Y_X');
   });
 });
 
@@ -84,21 +84,21 @@ describe('Misconfiguration ', () => {
   });
 
   test('should be write', () => {
-    expect(encrypt('abcde1A2B_C')).toMatch(/abcde1A2B_C/);
+    const mock = jest.fn(() => encrypt('abcde1A2B_C'));
+    expect(mock()).toMatch(/abcde1A2B_C/);
   });
 });
 
 describe('Error ', () => {
-  afterEach(() => {
-    mockSderr.mockRestore();
+  beforeEach(() => {
+    argv.push(...['-c', 'C2-D2-A2']);
   });
-
-  const println = (text) => {
-    stderr.write(text);
-  };
-  const mockSderr = jest.spyOn(stderr, 'write').mockImplementation(() => {});
-  println('Сonfiguration is not valid!');
-  test('should be write', () => {
-    expect(mockSderr).toHaveBeenCalledWith('Сonfiguration is not valid!');
+  afterEach(() => {
+    argv.splice(2);
+  });
+  const mock = jest.spyOn(process, 'exit').mockImplementation();
+  encrypt('abcde1A2B_C');
+  test('should be error', () => {
+    expect(mock).toHaveBeenCalledWith(1);
   });
 });

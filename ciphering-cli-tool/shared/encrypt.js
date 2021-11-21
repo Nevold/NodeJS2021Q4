@@ -1,4 +1,4 @@
-const { argv, stderr } = process;
+const { argv } = process;
 const { encryptAtbash } = require('./AtbashCipher');
 const { encryptCaesarRot } = require('./CaesarRotCipher');
 
@@ -14,7 +14,8 @@ function encrypt(text) {
         configLog[i][1] > 1 ||
         configLog[i][0] !== configLog[i][0].toUpperCase() ||
         !/[CRA]/.test(configLog[i][0]):
-        stderr.write('Сonfiguration is not valid!');
+        process.stderr.write('Сonfiguration is not valid!');
+        process.exit(1);
         break;
       case configLog[i][0] === 'C' && configLog[i][1] === '1':
         encryptText = encryptCaesarRot(encryptText, 1);

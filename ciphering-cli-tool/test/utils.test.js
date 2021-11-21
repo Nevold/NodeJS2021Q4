@@ -1,5 +1,5 @@
 const { argv } = process;
-const { inputFile, outputFile, isDuplicate } = require('../shared/utils');
+const { inputFile, outputFile, isDuplicate, duplicateError } = require('../shared/utils');
 
 describe('Function', () => {
   beforeEach(() => {
@@ -16,8 +16,36 @@ describe('Function', () => {
     expect(outputFile()).toBeDefined();
     expect(outputFile()).toMatch(/output/);
   });
-  test('should be find duplicate command', () => {
-    expect(isDuplicate()).toBeDefined();
+  test('should be true', () => {
     expect(isDuplicate()).toBeTruthy();
+  });
+});
+
+describe('Error ', () => {
+  beforeEach(() => {
+    argv.push(...['-c', 'C1']);
+  });
+  afterEach(() => {
+    argv.splice(2);
+  });
+
+  test('should be null', () => {
+    duplicateError();
+    expect(duplicateError()).toBeNull();
+  });
+});
+
+describe('Error ', () => {
+  beforeEach(() => {
+    argv.push(...['-c', 'C1', '-c', 'C1']);
+  });
+  afterEach(() => {
+    argv.splice(2);
+  });
+
+  test('should be error', () => {
+    const mock = jest.spyOn(process, 'exit').mockImplementation();
+    duplicateError();
+    expect(mock).toHaveBeenCalledWith(1);
   });
 });
